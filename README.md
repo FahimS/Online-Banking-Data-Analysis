@@ -129,9 +129,9 @@ The datasets used for this project are as follows:
 - **Customer Transactions**: `customer_transactions.csv`
 
 ## Technologies Used
-- **SQL**: For database creation and querying the datasets
-- **Power BI**: For data visualization (optional)
-- **Python**: For additional data processing (optional)
+- **MySQL**: For database creation and querying the datasets
+- **Power BI**: For data visualization
+- **Python**: For additional data processing (ETL)
 
 
 
