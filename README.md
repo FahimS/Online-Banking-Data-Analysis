@@ -2,7 +2,7 @@
 
 ## Dashboard Overview
 
-![Online Banking System Dashboard](https://github.com/FahimS/Online-Banking-Data-Analysis/blob/main/online_banking.jpg))
+![Online Banking System Dashboard](https://github.com/FahimS/Online-Banking-Data-Analysis/blob/main/online_banking.jpg)
 
 ## Project Overview
 
