@@ -1,6 +1,3 @@
-Here is the description in code format suitable for your README file:
-
-```markdown
 # Online Banking Data Analysis Project
 
 ## Project Overview
@@ -135,5 +132,3 @@ The datasets used for this project are as follows:
 ## Next Steps
 The solutions to these business queries will be added in a future update to this repository. Stay tuned for the detailed SQL queries and analysis.
 ```
-
-You can copy this into your `README.md` file, and it will display with proper code formatting. Let me know if you need any other adjustments!
