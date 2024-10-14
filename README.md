@@ -4,6 +4,10 @@
 
 ![Online Banking System Dashboard](https://github.com/FahimS/Online-Banking-Data-Analysis/blob/main/online_banking.jpg)
 
+## Power BI Dashboard
+
+You can download and explore the interactive Power BI dashboard for this project [here](https://github.com/FahimS/Online-Banking-Data-Analysis/blob/main/dw_online_banking.pbix).
+
 ## Project Overview
 
 This project is focused on performing a comprehensive analysis of an online banking system's customer and transaction data. The analysis addresses several key performance indicators (KPIs) and answers important business questions based on the provided customer joining and transaction datasets.
