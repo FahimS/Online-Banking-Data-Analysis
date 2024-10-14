@@ -1,3 +1,6 @@
+Here is the description in code format suitable for your README file:
+
+```markdown
 # Online Banking Data Analysis Project
 
 ## Project Overview
@@ -27,11 +30,28 @@ VALUES
   (3, 'Rajshahi'),
   (4, 'Sylhet'),
   (5, 'Barishal');
+```
 
 ### 2. **Area**
 This table defines different customer areas:
 - **area_id**: Integer (Primary Key)
 - **name**: The name of the area (e.g., Union, Upazila, Pouroshova, etc.)
+
+```sql
+CREATE TABLE area (
+  area_id INTEGER,
+  name VARCHAR(20)
+);
+
+INSERT INTO area
+  (area_id, name)
+VALUES
+  (1, 'Union'),
+  (2, 'Upazila'),
+  (3, 'Pouroshova'),
+  (4, 'Ward'),
+  (5, 'Village');
+```
 
 ### 3. **Customer Joining Information**
 This table contains data about customer joining:
@@ -40,12 +60,32 @@ This table contains data about customer joining:
 - **area_id**: Integer (Foreign Key from the Area table)
 - **join_date**: Date the customer joined
 
+```sql
+-- You will get the data from Excel (No need to execute the below DDL)
+CREATE TABLE customer_joining_info(
+  customer_id INTEGER,
+  region_id INTEGER,
+  area_id INTEGER,
+  join_date DATE
+);
+```
+
 ### 4. **Customer Transactions**
 This table holds the transaction history for each customer:
 - **customer_id**: Integer (Foreign Key)
 - **txn_date**: Date of the transaction
 - **txn_type**: Transaction type (e.g., Deposit, Withdrawal)
 - **txn_amount**: Transaction amount in integer format
+
+```sql
+-- You will get the data from Excel (No need to execute the below DDL)
+CREATE TABLE customer_transactions (
+  customer_id INTEGER,
+  txn_date DATE,
+  txn_type VARCHAR(10),
+  txn_amount INTEGER
+);
+```
 
 ## Key Performance Indicators (KPIs)
 
@@ -94,3 +134,6 @@ The datasets used for this project are as follows:
 
 ## Next Steps
 The solutions to these business queries will be added in a future update to this repository. Stay tuned for the detailed SQL queries and analysis.
+```
+
+You can copy this into your `README.md` file, and it will display with proper code formatting. Let me know if you need any other adjustments!
