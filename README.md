@@ -1,10 +1,8 @@
 # Online Banking Data Analysis Project
 
-## Dashboard Overview
+## Dashboard Overview (Power BI)
 
 ![Online Banking System Dashboard](https://github.com/FahimS/Online-Banking-Data-Analysis/blob/main/online_banking.jpg)
-
-## Power BI Dashboard
 
 You can download and explore the interactive Power BI dashboard for this project [online banking](https://github.com/FahimS/Online-Banking-Data-Analysis/blob/main/dw_online_banking.pbix).
 
