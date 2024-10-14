@@ -6,7 +6,7 @@
 
 ## Power BI Dashboard
 
-You can download and explore the interactive Power BI dashboard for this project [here](https://github.com/FahimS/Online-Banking-Data-Analysis/blob/main/dw_online_banking.pbix).
+You can download and explore the interactive Power BI dashboard for this project [online banking](https://github.com/FahimS/Online-Banking-Data-Analysis/blob/main/dw_online_banking.pbix).
 
 ## Project Overview
 
