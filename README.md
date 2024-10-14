@@ -131,4 +131,4 @@ The datasets used for this project are as follows:
 
 ## Next Steps
 The solutions to these business queries will be added in a future update to this repository. Stay tuned for the detailed SQL queries and analysis.
-```
+
