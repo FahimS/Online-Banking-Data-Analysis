@@ -1,5 +1,9 @@
 # Online Banking Data Analysis Project
 
+## Dashboard Overview
+
+![Online Banking System Dashboard](https://github.com/FahimS/Online-Banking-Data-Analysis/online_banking.jpg)
+
 ## Project Overview
 
 This project is focused on performing a comprehensive analysis of an online banking system's customer and transaction data. The analysis addresses several key performance indicators (KPIs) and answers important business questions based on the provided customer joining and transaction datasets.
@@ -129,6 +133,127 @@ The datasets used for this project are as follows:
 - **Power BI**: For data visualization (optional)
 - **Python**: For additional data processing (optional)
 
-## Next Steps
-The solutions to these business queries will be added in a future update to this repository. Stay tuned for the detailed SQL queries and analysis.
 
+
+## Key Performance Indicators (KPIs) Solutions
+
+Here are the SQL queries used to solve the KPIs defined in the project.
+
+### 1. How many unique customers are there?
+
+```sql
+SELECT COUNT(DISTINCT customer_id) AS unique_customers
+FROM customer_joining_info;
+```
+
+### 2. How many unique customers are coming from each region?
+
+```sql
+SELECT r.region_name, COUNT(DISTINCT customer_id) AS unique_customers
+FROM customer_joining_info cj
+JOIN region r USING (region_id)
+GROUP BY r.region_name;
+```
+
+### 3. How many unique customers are coming from each area?
+
+```sql
+SELECT name AS area_name, COUNT(DISTINCT customer_id) AS unique_customers
+FROM customer_joining_info cj
+JOIN area USING (area_id)
+GROUP BY area_name;
+```
+
+### 4. What is the total amount for each transaction type?
+
+```sql
+SELECT txn_type AS Transaction_Name, SUM(txn_amount) AS Total_Amount
+FROM customer_transactions
+GROUP BY txn_type;
+```
+
+### 5. For each month - how many customers make more than 1 deposit and 1 withdrawal in a single month?
+
+```sql
+SELECT DATE_FORMAT(txn_date, '%Y-%m') AS txn_month,
+       COUNT(customer_id) AS Customer_count
+FROM customer_transactions
+GROUP BY txn_month
+HAVING COUNT(CASE WHEN txn_type = 'deposit' THEN 1 ELSE 0 END) > 1
+   AND COUNT(CASE WHEN txn_type = 'withdrawal' THEN 1 ELSE 0 END) > 1;
+```
+
+### 6. What is the closing balance for each customer?
+
+```sql
+SELECT customer_id,
+       SUM(CASE WHEN txn_type = 'deposit' THEN txn_amount ELSE 0 END) -
+       SUM(CASE WHEN txn_type = 'withdrawal' THEN txn_amount ELSE 0 END) AS closing_balance
+FROM customer_transactions
+GROUP BY customer_id;
+```
+
+### 7. What is the closing balance for each customer at the end of the month?
+
+```sql
+SELECT customer_id,
+       DATE_FORMAT(txn_date, '%Y-%m') AS transaction_month,
+       SUM(CASE WHEN txn_type = 'deposit' THEN txn_amount ELSE 0 END) -
+       SUM(CASE WHEN txn_type = 'withdrawal' THEN txn_amount ELSE 0 END) AS closing_balance
+FROM customer_transactions
+GROUP BY customer_id, transaction_month;
+```
+
+### 8. Please show the latest 5 days total withdraw amount.
+
+```sql
+SELECT txn_date,
+       SUM(txn_amount) AS total_withdrawal
+FROM customer_transactions
+WHERE txn_type = 'withdrawal'
+GROUP BY txn_date
+ORDER BY txn_date DESC
+LIMIT 5;
+```
+
+### 9. Find out the total deposit amount for every five days consecutive series. You can assume 1 week = 5 days.
+
+```sql
+WITH ranked_transactions AS (
+  SELECT txn_date,
+         SUM(txn_amount) AS total_amount,
+         ROW_NUMBER() OVER (ORDER BY txn_date) AS row_num
+  FROM customer_transactions
+  WHERE txn_type = 'deposit'
+  GROUP BY txn_date
+)
+SELECT CEIL(row_num / 5) AS week_number,
+       SUM(total_amount) AS total_deposit
+FROM ranked_transactions
+GROUP BY week_number
+ORDER BY week_number;
+```
+
+### 10. Compare every week's total deposit amount with the previous week.
+
+```sql
+WITH ranked_transactions AS (
+  SELECT txn_date,
+         SUM(txn_amount) AS total_amount,
+         ROW_NUMBER() OVER (ORDER BY txn_date) AS row_num
+  FROM customer_transactions
+  WHERE txn_type = 'deposit'
+  GROUP BY txn_date
+), weekly_deposits AS (
+  SELECT CEIL(row_num / 5) AS week_number,
+         SUM(total_amount) AS total_deposit
+  FROM ranked_transactions
+  GROUP BY week_number
+)
+SELECT week_number,
+       total_deposit,
+       LAG(total_deposit) OVER (ORDER BY week_number) AS previous_week_deposit,
+       total_deposit - LAG(total_deposit) OVER (ORDER BY week_number) AS deposit_difference
+FROM weekly_deposits
+ORDER BY week_number;
+```
